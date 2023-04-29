@@ -5,7 +5,6 @@ services:
     container_name: django
     build: .
     command: gunicorn -c /code/gunicorn/conf.py --bind :8000 --chdir /code/app config.wsgi:application
-    # command: python manage.py runserver
     working_dir: /code/app
     env_file:
       - .env.example
@@ -34,6 +33,19 @@ services:
       retries: 3
     volumes:
       - postgres_data:/var/lib/postgresql/data:cached
+
+  celery:
+    container_name: celery
+    build: .
+    command: celery -A config worker -l INFO
+    env_file: .env.example
+    working_dir: /code/app
+    volumes:
+      - .:/code
+    depends_on:
+      - app
+      - db
+      - redis
 
   redis:
     container_name: redis

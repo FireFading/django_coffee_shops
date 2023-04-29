@@ -5,6 +5,6 @@ app_name = "coffee"
 
 urlpatterns = [
     path("", HomeView.as_view(), name="home"),
-    path("catalog", ProductsListView.as_view(), name="catalog"),
+    path("catalog/", ProductsListView.as_view(), name="catalog"),
     path("catalog/<str:product_name>", ProductDetailView.as_view(), name="detail"),
 ]

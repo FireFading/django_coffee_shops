@@ -1,6 +1,8 @@
 django
 django_filter
 django_widget_tweaks
+phonenumbers
+email_validator
 psycopg2-binary
 celery
 redis
