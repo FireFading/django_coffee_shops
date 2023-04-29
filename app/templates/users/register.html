@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <form class="form-control" data-bitwarden-watching="1" action="{% url 'users:login' %}" method="post">
+        <h2 class="text-center">Welcome!</h2>
+        {% csrf_token %}
+        <div class="row">
+            {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            {% if form.errors %}
+            {% for field in form %}
+            {% if field.errors %}
+            <div class="alert alert-primary" role="alert">
+                {{ field.errors|striptags }}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+
+            {% for field in form %}
+                {% render_field field placeholder=field.name %}
+            {% endfor %}
+        </div>
+
+        <input type="hidden" name="next" value="{{ next }}">
+        <button class="form-button" type="submit" value="Register">Register</button><br>
+        <div class="text-center">
+            <a class="form-link" href="{% url 'users:login' %}" class="mb-10">Already have account? Login</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

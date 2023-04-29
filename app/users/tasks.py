@@ -13,7 +13,7 @@ from users.utils import account_activation_token
 def send_mail(request, data, user: User):
     email = data.get("email")
     current_site = get_current_site(request)
-    subject = f"Подписка на рассылку {current_site}"
+    subject = f"Subscribe on {current_site}"
     message = render_to_string(
         "email/account_activation.html",
         {

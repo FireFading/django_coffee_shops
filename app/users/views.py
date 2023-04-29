@@ -30,22 +30,22 @@ def account_activate(request, uidb64, token, backend="django.contrib.auth.backen
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
     except Exception as error:
-        print(f"Произошла ошибка поиска пользователя: {error}")
+        print(f"Error to find user: {error}")
         user = None
     if user is None or not account_activation_token.check_token(user, token):
-        messages.error(request, "Некорректная ссылка активации. Пожалуйста, попробуйте еще раз")
+        messages.error(request, "Invalid link. Please, try again")
         return render(request, "account/account_activation_invalid.html")
     user.is_active = True
     user.save()
-    messages.success(request, "Ваш аккаунт активирован")
+    messages.success(request, "Your account has been activated")
     login(request, user, backend=backend)
-    return redirect("core:catalog")
+    return redirect("menu:home")
 
 
 class LoginView(FormView):
-    template_name = "account/login.html"
+    template_name = "users/login.html"
     form_class = LoginForm
-    success_url = reverse_lazy("core:catalog")
+    success_url = reverse_lazy("menu:home")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -53,29 +53,29 @@ class LoginView(FormView):
         user = authenticate(email=email, password=password)
         if user is None or not user.is_active:
             return self.form_invalid(form)
-        messages.success(self.request, "Вход выполнен успешно")
+        messages.success(self.request, "Login successful")
         login(self.request, user)
         return redirect(self.success_url)
 
 
 class SignupView(FormView):
-    template_name = "account/signup.html"
+    template_name = "users/register.html"
     form_class = SignupForm
-    success_url = reverse_lazy("accounts:login")
+    success_url = reverse_lazy("users:login")
 
     def form_valid(self, form):
         user = form.save()
         send_mail(self.request, form.cleaned_data, user)
-        messages.success(self.request, "Аккаунт успешно создан")
-        messages.success(self.request, "Вам на почту отправлена ссылка активации аккаунта")
+        messages.success(self.request, "Profile successfully created")
+        messages.success(self.request, "To your mail send confirmation to activate your account")
         return super(SignupView, self).form_valid(form)
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = "account/profile_edit.html"
+    template_name = "user/profile_edit.html"
     model = User
     fields = ["phone", "email"]
-    success_url = reverse_lazy("accounts:profile_edit")
+    success_url = reverse_lazy("users:profile_edit")
 
     def get_object(self):
         return self.request.user
@@ -86,10 +86,10 @@ class UserPasswordResetView(PasswordResetView):
     sends email with token
     """
 
-    template_name = "account/password_reset.html"
+    template_name = "users/password_reset.html"
     email_template_name = ("email/password_reset.html",)
     success_url = reverse_lazy("accounts:password_reset_done")
-    title = _("Восстановление пароля")
+    title = _("Reset password")
     token_generator = default_token_generator
 
 
@@ -98,7 +98,7 @@ class UserPasswordDoneView(PasswordResetDoneView):
     shows success message for email sending
     """
 
-    template_name = "account/password_reset_done.html"
+    template_name = "users/password_reset_done.html"
 
 
 class UserPasswordConfirmView(PasswordResetConfirmView):
@@ -106,7 +106,7 @@ class UserPasswordConfirmView(PasswordResetConfirmView):
     checks link user clicked and processing new password
     """
 
-    template_name = "account/password_reset_confirm.html"
+    template_name = "users/password_reset_confirm.html"
 
 
 class UserPasswordCompleteView(PasswordResetCompleteView):
@@ -114,17 +114,17 @@ class UserPasswordCompleteView(PasswordResetCompleteView):
     shows success message for changing new password
     """
 
-    template_name = "account/password_reset_complete.html"
+    template_name = "users/password_reset_complete.html"
 
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     model = User
-    success_url = reverse_lazy("core:catalog")
-    template_name = "account/profile_delete_confirm.html"
+    success_url = reverse_lazy("menu:home")
+    template_name = "users/profile_delete_confirm.html"
 
 
 class ChangePasswordView(LoginRequiredMixin, View):
-    template_name = "account/password_change.html"
+    template_name = "users/password_change.html"
 
     def get(self, request):
         form = UserPasswordChangeForm(request.user)
@@ -137,7 +137,7 @@ class ChangePasswordView(LoginRequiredMixin, View):
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
-            subject = "Пароль на сайте успешно изменен"
+            subject = "Password successfully changed"
             current_site = get_current_site(self.request)
             message = render_to_string(
                 "email/change_password.html",
@@ -154,11 +154,11 @@ class ChangePasswordView(LoginRequiredMixin, View):
                 [user.email],
             )
             send_email.send()
-            messages.success(request, "Пароль успешно изменен")
+            messages.success(request, "Password successfully changed")
 
             return redirect("accounts:profile_edit")
         else:
-            messages.error(request, "Пожалуйста, исправьте ошибки")
+            messages.error(request, "Please, correct the form")
 
         context = {"form": form}
 

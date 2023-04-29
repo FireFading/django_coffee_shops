@@ -7,10 +7,11 @@
 - get all shops
 - get all menu items
 - get detail information about shop/menu item
+- self-created css and html
 
 ## Installation
 - in env.example all variables used in project, change it to .env, several variables that are common, already define as example, secret variables is empty
-- in app folder create `media/` and `static/` folders
+- in app folder create `media/` folder
 - collect static
 ```bash
   docker exec -it django python manage.py collectstatic

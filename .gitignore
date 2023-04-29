@@ -5,7 +5,7 @@
 __pycache__
 db.sqlite3
 media
-
+app/static/admin/
 
 # Backup files #
 *.bak

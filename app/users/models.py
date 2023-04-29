@@ -30,7 +30,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = EmailField(unique=True, null=True, verbose_name="Email")
-    phone = CharField(max_length=100, blank=True, null=True, verbose_name="Телефон")
+    phone = CharField(max_length=100, blank=True, null=True, verbose_name="Phone")
     is_active = BooleanField(default=False)
     is_staff = BooleanField(default=False)
 
@@ -40,8 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ["phone"]
 
     class Meta:
-        verbose_name = "Пользователь"
-        verbose_name_plural = "Пользователи"
+        verbose_name = "User"
+        verbose_name_plural = "Users"
         swappable = "AUTH_USER_MODEL"
 
     def __str__(self):

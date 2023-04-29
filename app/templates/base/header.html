@@ -6,9 +6,16 @@
         </h1>
         <nav am-layout="horizontal">
             <a href="{% url 'menu:home' %}">Home</a>
-            <a href="#">About</a>
             <a href="{% url 'menu:catalog' %}">Products</a>
-            <a href="#">Contact</a>
+            <a href="{% url 'shops:all' %}">Shops</a>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'users:logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'users:login' %}">Login</a>
+                <a href="{% url 'users:register' %}">Register</a>
+            {% endif %}
+
         </nav>
     </div>
 </header>

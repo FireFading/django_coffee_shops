@@ -1,0 +1,18 @@
+.form-button {
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #251a06d9;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: 515;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-link {
+    text-align: center;
+    font-size: 14px;
+    color: #251a06be;
+    font-weight: 500;
+}

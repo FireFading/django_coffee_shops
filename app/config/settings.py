@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
+    "crispy_forms",
     "widget_tweaks",
     "users",
     "shops",
@@ -85,14 +86,13 @@ AUTH_USER_MODEL = "users.User"
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
 # Internationalization
-LANGUAGE_CODE = "ru-ru"
 TIME_ZONE = "Europe/Moscow"
 USE_I18N = True
 USE_TZ = True
 
-
-STATIC_URL = "/static/"
-STATICFILES_DIRS = [f"{BASE_DIR}/static"]
+# Static files
+STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 # Media files
 MEDIA_URL = "media/"

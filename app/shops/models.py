@@ -2,11 +2,11 @@ from django.db import models
 
 
 class Shop(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="Название")
-    address = models.CharField(max_length=200, verbose_name="Адрес")
-    phone_number = models.CharField(max_length=20, verbose_name="Телефон")
-    opening_time = models.TimeField(verbose_name="Время открытия")
-    closing_time = models.TimeField(verbose_name="Время закрытия")
+    name = models.CharField(max_length=100, unique=True, verbose_name="Name")
+    address = models.CharField(max_length=200, verbose_name="Address")
+    phone_number = models.CharField(max_length=20, verbose_name="Phone number")
+    opening_time = models.TimeField(verbose_name="Opening time")
+    closing_time = models.TimeField(verbose_name="Closing time")
 
     class Meta:
         verbose_name = "Shop"

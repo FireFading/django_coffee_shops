@@ -1,0 +1,14 @@
+{% load widget_tweaks %}
+
+<form method="get">
+
+    {% for field in filter.form %}
+        {% render_field field class="form-control form-control-sm" placeholder=field.name %}
+    {% endfor %}
+
+    <button type="submit">
+        Sort
+    </button>
+
+</div>
+</form>

@@ -17,7 +17,7 @@ app_name = "accounts"
 
 urlpatterns = [
     path("", ProfileEditView.as_view(), name="profile_edit"),
-    path("signup/", SignupView.as_view(), name="signup"),
+    path("register/", SignupView.as_view(), name="register"),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("activate/<slug:uidb64>/<slug:token>/", account_activate, name="activate"),
