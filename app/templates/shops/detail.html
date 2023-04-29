@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+<!-- <img class="shop-img" src="{% static 'img/coffee.jpg' %}" alt=""> -->
+<div class="shop-info">
+<h3>{{shop.name}}</h3>
+<p>{{product.address}} $</p><br>
+
+</div>
+
+</div>
+
+{% endblock %}
