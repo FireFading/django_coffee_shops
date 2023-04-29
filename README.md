@@ -8,8 +8,6 @@
 - get all menu items
 - get detail information about shop/menu item
 
-![image](https://user-images.githubusercontent.com/91421235/233180044-4b3dd8f4-c3a1-469d-931a-8afa2e7aef4b.png)
-
 ## Installation
 - in env.example all variables used in project, change it to .env, several variables that are common, already define as example, secret variables is empty
 - in app folder create `media/` and `static/` folders
