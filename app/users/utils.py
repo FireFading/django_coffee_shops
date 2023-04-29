@@ -1,7 +1,5 @@
-from django.contrib.auth.models import User
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from six import text_type
-
+from six import text_type  # type:ignore
 from users.models import User
 
 

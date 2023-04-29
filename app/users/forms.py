@@ -1,20 +1,12 @@
 import re
 
 import phonenumbers
-from email_validator import validate_email, EmailNotValidError
 from django.conf import settings
 from django.contrib.auth import password_validation
 from django.contrib.auth.forms import PasswordChangeForm
-from django.forms import (
-    CharField,
-    EmailField,
-    ModelForm,
-    PasswordInput,
-    EmailInput,
-    ValidationError,
-)
+from django.forms import CharField, EmailField, EmailInput, ModelForm, PasswordInput, ValidationError
 from django.utils.translation import gettext as _
-
+from email_validator import EmailNotValidError, validate_email
 from users.models import User
 
 
@@ -37,9 +29,7 @@ class LoginForm(ModelForm):
         self.fields["email"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Ваш email", "name": "email"}
         )
-        self.fields["password"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "Пароль"}
-        )
+        self.fields["password"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "Пароль"})
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -81,18 +71,12 @@ class SignupForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["phone"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "Ваш телефон"}
-        )
+        self.fields["phone"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "Ваш телефон"})
         self.fields["email"].widget.attrs.update(
             {"class": "form-control mb-3", "placeholder": "Ваш email", "name": "email"}
         )
-        self.fields["password"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "****"}
-        )
-        self.fields["password2"].widget.attrs.update(
-            {"class": "form-control mb-3", "placeholder": "****"}
-        )
+        self.fields["password"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "****"})
+        self.fields["password2"].widget.attrs.update({"class": "form-control mb-3", "placeholder": "****"})
 
     def save(self):
         user = super(SignupForm, self).save()
@@ -108,13 +92,9 @@ class SignupForm(ModelForm):
             raise ValidationError("Такой телефон уже зарегистрирован")
         try:
             phone = phonenumbers.parse(phone)
-            if phonenumbers.is_valid_number(phone) and phonenumbers.is_possible_number(
-                phone
-            ):
+            if phonenumbers.is_valid_number(phone) and phonenumbers.is_possible_number(phone):
                 return (
-                    phonenumbers.format_number(
-                        phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL
-                    )
+                    phonenumbers.format_number(phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
                     .replace(" ", "")
                     .replace("-", "")
                 )
@@ -133,7 +113,8 @@ class SignupForm(ModelForm):
             return password
         except Exception as error:
             raise ValidationError(
-                "Длина пароля от 8 до 24 символов. Пароль должен содержать цифры, спецсимволы (.,@,_,-,%,$,/,\\,*,!, включая пробел) и латинские буквы верхнего и нижнего регистра."
+                "Длина пароля от 8 до 24 символов. Пароль должен содержать цифры, спецсимволы \
+                (.,@,_,-,%,$,/,\\,*,!, включая пробел) и латинские буквы верхнего и нижнего регистра."
             ) from error
 
     def clean_email(self):
@@ -164,16 +145,12 @@ class UserPasswordChangeForm(PasswordChangeForm):
     )
     new_password1 = CharField(
         label=_("Новый пароль"),
-        widget=PasswordInput(
-            attrs={"autocomplete": "new-password", "class": "form-control"}
-        ),
+        widget=PasswordInput(attrs={"autocomplete": "new-password", "class": "form-control"}),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = CharField(
         label=_("Новый пароль еше раз"),
         strip=False,
-        widget=PasswordInput(
-            attrs={"autocomplete": "new-password", "class": "form-control"}
-        ),
+        widget=PasswordInput(attrs={"autocomplete": "new-password", "class": "form-control"}),
     )

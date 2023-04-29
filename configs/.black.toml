@@ -1,3 +1,4 @@
 [tool.black]
 line-length = 120
 double-quote = true
+extend-exclude = '''(migrations)'''

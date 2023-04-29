@@ -17,18 +17,15 @@ from django.urls import reverse_lazy
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
-from django.views.generic import DeleteView, ListView, View
+from django.views.generic import DeleteView, View
 from django.views.generic.edit import FormView, UpdateView
-
-from users.forms import SignupForm, LoginForm, UserPasswordChangeForm
+from users.forms import LoginForm, SignupForm, UserPasswordChangeForm
 from users.models import User
 from users.tasks import send_mail
 from users.utils import account_activation_token
 
 
-def account_activate(
-    request, uidb64, token, backend="django.contrib.auth.backends.ModelBackend"
-):
+def account_activate(request, uidb64, token, backend="django.contrib.auth.backends.ModelBackend"):
     try:
         uid = force_str(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)
@@ -36,9 +33,7 @@ def account_activate(
         print(f"Произошла ошибка поиска пользователя: {error}")
         user = None
     if user is None or not account_activation_token.check_token(user, token):
-        messages.error(
-            request, "Некорректная ссылка активации. Пожалуйста, попробуйте еще раз"
-        )
+        messages.error(request, "Некорректная ссылка активации. Пожалуйста, попробуйте еще раз")
         return render(request, "account/account_activation_invalid.html")
     user.is_active = True
     user.save()
@@ -72,9 +67,7 @@ class SignupView(FormView):
         user = form.save()
         send_mail(self.request, form.cleaned_data, user)
         messages.success(self.request, "Аккаунт успешно создан")
-        messages.success(
-            self.request, "Вам на почту отправлена ссылка активации аккаунта"
-        )
+        messages.success(self.request, "Вам на почту отправлена ссылка активации аккаунта")
         return super(SignupView, self).form_valid(form)
 
 
