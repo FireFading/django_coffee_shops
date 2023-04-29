@@ -4,9 +4,9 @@ from shops.models import Shop
 
 
 class MenuFilter(FilterSet):
-    name = CharFilter(field_name="name", lookup_expr="icontains")
-    price_from = NumberFilter(field_name="price", lookup_expr="gt")
-    price_to = NumberFilter(field_name="price", lookup_expr="lt")
+    name = CharFilter(field_name="Название", lookup_expr="icontains")
+    price_from = NumberFilter(field_name="Цена от", lookup_expr="gt")
+    price_to = NumberFilter(field_name="Цена до", lookup_expr="lt")
     ordering = OrderingFilter(
         fields=(
             ("name", "name"),

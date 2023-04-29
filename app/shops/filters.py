@@ -3,8 +3,8 @@ from shops.models import Shop
 
 
 class ShopFilter(FilterSet):
-    name = CharFilter(field_name="name", lookup_expr="icontains")
-    address = CharFilter(field_name="address", lookup_expr="icontains")
+    name = CharFilter(field_name="Название", lookup_expr="icontains")
+    address = CharFilter(field_name="Адрес", lookup_expr="icontains")
     ordering = OrderingFilter(
         fields=(
             ("name", "name"),
