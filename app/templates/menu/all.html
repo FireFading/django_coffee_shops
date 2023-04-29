@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+<form method="get">
+{% for field in filter.form %}
+    {% render_field field class="form-control form-control-sm" placeholder=field.name %}
+{% endfor %}
+<button type="submit">
+    Sort
+</button>
+</div>
+</form>
+
+<div class="catalog_items">
+{% for product in products %}
+<div class="product-card">
+    <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
+    <div class="product-info">
+        <h3>{{product.name}}</h3>
+        <p>{{product.price}} $</p><br>
+        <strong>{{product.town}}</strong><br>
+        <a href="{% url 'menu:detail' product.name %}">Show detail</a>
+    </div>
+</div>
+
+{% endfor %}
+</div>
+{% endblock %}

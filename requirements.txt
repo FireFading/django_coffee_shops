@@ -1,0 +1,9 @@
+django
+django_filter
+django_widget_tweaks
+psycopg2-binary
+celery
+redis
+uwsgi
+gunicorn
+nox

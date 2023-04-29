@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    container_name: django
+    build: .
+    command: gunicorn -c /code/gunicorn/conf.py --bind :8000 --chdir /code/app config.wsgi:application
+    # command: python manage.py runserver
+    working_dir: /code/app
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis
+
+  db:
+    container_name: postgres
+    image: postgres:alpine
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./app/static:/static
+      - ./app/media:/media
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+volumes:
+  postgres_data:

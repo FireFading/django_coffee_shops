@@ -1,0 +1,32 @@
+{% load static %}
+<footer>
+
+    <div class="container__footer">
+        <div class="box__footer">
+            <div class="logo">
+                <img src="{% static 'img/coffee.jpg' %}" alt="">
+            </div>
+            <div class="terms">
+                <p>Coffee is one of the most popular beverages in the world. It's a brewed drink made from roasted coffee beans, which are the seeds of berries from the Coffea plant. The aroma and taste of coffee can vary depending on the type of bean, the roast, and the brewing method.</p>
+            </div>
+        </div>
+        <div class="box__footer">
+            <h2>Company</h2>
+            <a href="https://github.com/FireFading">About author</a>
+            <a href="#">Reviews</a>
+            <a href="#">Contacts</a>
+        </div>
+
+        <div class="box__footer">
+            <h2>COFFEE</h2>
+            <a href="{% url 'menu:catalog' %}">Menu</a>
+            <a href="#">Shops</a>
+            <a href="#">Recipes</a>
+        </div>
+    </div>
+
+    <div class="box__copyright">
+        <hr>
+        <p>2023, Svetlana Rudneva <b>Orel</b></p>
+    </div>
+</footer>
