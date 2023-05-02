@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from shops.filters import ShopFilter
 from shops.models import Shop
 from django.urls import reverse
@@ -49,3 +49,13 @@ class ShopUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('shops:detail', kwargs={'shop_name': self.object.name})
+
+
+class ShopDeleteView(DeleteView):
+    model = Shop
+    template_name = 'shops/delete.html'
+    success_url = reverse_lazy('shops:all')
+
+    def get_object(self, queryset=None):
+        shop_name = self.kwargs.get('shop_name')
+        return get_object_or_404(Shop, name=shop_name)

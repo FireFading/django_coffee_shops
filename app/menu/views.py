@@ -1,6 +1,6 @@
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView, UpdateView
-from django.views.generic.edit import CreateView
+from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from menu.filters import MenuFilter
 from django.shortcuts import get_object_or_404
 from menu.models import MenuItem
@@ -54,3 +54,12 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('menu:detail', kwargs={'product_name': self.object.name})
 
+
+class ProductDeleteView(DeleteView):
+    model = MenuItem
+    template_name = 'menu/delete.html'
+    success_url = reverse_lazy('menu:catalog')
+
+    def get_object(self, queryset=None):
+        product_name = self.kwargs.get('product_name')
+        return get_object_or_404(MenuItem, name=product_name)

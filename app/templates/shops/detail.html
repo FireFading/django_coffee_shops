@@ -23,6 +23,9 @@
     <a href="{% url 'shops:edit' shop.name %}">
         <button>Edit</button>
     </a>
+    <a href="{% url 'shops:delete' shop.name %}">
+        <button>Delete</button>
+    </a>
 </div>
 
 {% endblock %}

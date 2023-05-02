@@ -287,3 +287,11 @@ form .message {
     position: absolute;
     margin-bottom: 50px;
 }
+
+.message-buttons {
+    margin-top: 80px;
+}
+
+.danger:hover {
+    background-color:red
+}
