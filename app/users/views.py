@@ -23,6 +23,7 @@ from users.forms import LoginForm, SignupForm, UserPasswordChangeForm
 from users.models import User
 from users.tasks import send_mail
 from users.utils import account_activation_token
+from django.contrib.auth.views import LogoutView
 
 
 def account_activate(request, uidb64, token, backend="django.contrib.auth.backends.ModelBackend"):
@@ -163,3 +164,8 @@ class ChangePasswordView(LoginRequiredMixin, View):
         context = {"form": form}
 
         return render(request, self.template_name, context)
+
+
+class CustomLogoutView(LogoutView):
+    next_page = reverse_lazy("base:home")
+    # template_name = "users/logout.html"
