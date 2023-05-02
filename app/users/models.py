@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db.models import BooleanField, CharField, EmailField, ManyToManyField
 from django.utils.translation import gettext_lazy as _
-from menu.models import MenuItem
+from menu.models import Product
 
 
 class UserManager(BaseUserManager):
@@ -35,7 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = BooleanField(default=False)
     is_staff = BooleanField(default=False)
 
-    favorites = ManyToManyField(MenuItem, blank=True, related_name="favored_by")
+    favorites = ManyToManyField(Product, blank=True, related_name="favored_by")
 
     objects = UserManager()
 

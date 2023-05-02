@@ -28,6 +28,7 @@
         <div class="box__footer">
             <h2>Profile</h2>
             {% if user.is_authenticated %}
+                <a href="{% url 'users:profile_edit' %}">Edit</a>
                 <a href="{% url 'users:logout' %}">Logout</a>
             {% else %}
                 <a href="{% url 'users:login' %}">Login</a>

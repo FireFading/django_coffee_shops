@@ -1,5 +1,5 @@
 from django_filters import CharFilter, FilterSet, ModelChoiceFilter, NumberFilter, OrderingFilter
-from menu.models import MenuItem
+from menu.models import Product
 from shops.models import Shop
 
 
@@ -22,5 +22,5 @@ class MenuFilter(FilterSet):
         return queryset.filter(**{lookup: False})
 
     class Meta:
-        model = MenuItem
+        model = Product
         fields = ["name", "shop"]

@@ -1,4 +1,4 @@
 from django.contrib import admin
-from menu.models import MenuItem
+from menu.models import Product
 
-admin.site.register(MenuItem)
+admin.site.register(Product)

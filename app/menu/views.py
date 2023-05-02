@@ -3,17 +3,17 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from menu.filters import MenuFilter
-from menu.models import MenuItem
+from menu.models import Product
 
 
 class ProductsListView(ListView):
-    model = MenuItem
+    model = Product
     template_name = "menu/all.html"
     context_object_name = "products"
     paginate_by = 50
 
     def get_queryset(self):
-        self.filterset = queryset = MenuFilter(self.request.GET, queryset=MenuItem.objects.filter())
+        self.filterset = queryset = MenuFilter(self.request.GET, queryset=Product.objects.filter())
         return queryset.qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -23,7 +23,7 @@ class ProductsListView(ListView):
 
 
 class ProductDetailView(DetailView):
-    model = MenuItem
+    model = Product
     template_name = "menu/detail.html"
     slug_field = "name"
     slug_url_kwarg = "product_name"
@@ -31,39 +31,39 @@ class ProductDetailView(DetailView):
 
 
 class CreateProductView(CreateView):
-    model = MenuItem
+    model = Product
     fields = "__all__"
     template_name = "menu/add_new.html"
     success_url = reverse_lazy("menu:catalog")
 
 
 class ProductUpdateView(UpdateView):
-    model = MenuItem
+    model = Product
     fields = ["price", "description", "shop"]
     template_name = "menu/edit.html"
 
     def get_object(self, queryset=None):
         product_name = self.kwargs.get("product_name")
-        return get_object_or_404(MenuItem, name=product_name)
+        return get_object_or_404(Product, name=product_name)
 
     def get_success_url(self):
         return reverse("menu:detail", kwargs={"product_name": self.object.name})
 
 
 class ProductDeleteView(DeleteView):
-    model = MenuItem
+    model = Product
     template_name = "menu/delete.html"
     success_url = reverse_lazy("menu:catalog")
 
     def get_object(self, queryset=None):
         product_name = self.kwargs.get("product_name")
-        return get_object_or_404(MenuItem, name=product_name)
+        return get_object_or_404(Product, name=product_name)
 
 
 class AddToFavoritesView(View):
     def post(self, request, *args, **kwargs):
         product_name = kwargs.get("product_name")
-        menu_item = get_object_or_404(MenuItem, name=product_name)
+        menu_item = get_object_or_404(Product, name=product_name)
 
         request.user.favorites.add(menu_item)
 
@@ -73,7 +73,7 @@ class AddToFavoritesView(View):
 class RemoveFromFavoritesView(View):
     def post(self, request, *args, **kwargs):
         product_name = kwargs.get("product_name")
-        menu_item = get_object_or_404(MenuItem, name=product_name)
+        menu_item = get_object_or_404(Product, name=product_name)
 
         request.user.favorites.remove(menu_item)
 

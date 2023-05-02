@@ -2,7 +2,7 @@ from django.db import models
 from shops.models import Shop
 
 
-class MenuItem(models.Model):
+class Product(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name", unique=True)
     price = models.FloatField(verbose_name="Price")
     description = models.TextField(verbose_name="Description")
