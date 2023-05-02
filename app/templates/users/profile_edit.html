@@ -10,6 +10,11 @@
             <div class="product-info">
                 <strong>{{product.name}}</strong>
                 <a href="{% url 'menu:detail' product.name %}">Show more</a>
+
+                <form action="{% url 'menu:unlike' product.name %}" method="post">
+                    {% csrf_token %}
+                    <button class="danger" type="submit">Delete</button>
+                </form>
             </div>
         {% endfor %}
     </div>

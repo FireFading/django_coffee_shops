@@ -70,3 +70,14 @@ class AddToFavoritesView(View):
         request.user.favorites.add(menu_item)
 
         return redirect("menu:detail", product_name=product_name)
+
+
+class RemoveFromFavoritesView(View):
+    def post(self, request, *args, **kwargs):
+        product_name = kwargs.get("product_name")
+        menu_item = get_object_or_404(MenuItem, name=product_name)
+
+        request.user.favorites.remove(menu_item)
+
+        return redirect("menu:detail", product_name=product_name)
+
