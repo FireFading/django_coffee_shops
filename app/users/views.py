@@ -35,7 +35,7 @@ def account_activate(request, uidb64, token, backend="django.contrib.auth.backen
         user = None
     if user is None or not account_activation_token.check_token(user, token):
         messages.error(request, "Invalid link. Please, try again")
-        return render(request, "account/account_activation_invalid.html")
+        return render(request, "users/account_activation_invalid.html")
     user.is_active = True
     user.save()
     messages.success(request, "Your account has been activated")
@@ -88,8 +88,8 @@ class UserPasswordResetView(PasswordResetView):
     """
 
     template_name = "users/password_reset.html"
-    email_template_name = ("email/password_reset.html",)
-    success_url = reverse_lazy("accounts:password_reset_done")
+    email_template_name = ("mail/password_reset.html",)
+    success_url = reverse_lazy("users:password_reset_done")
     title = _("Reset password")
     token_generator = default_token_generator
 
@@ -141,7 +141,7 @@ class ChangePasswordView(LoginRequiredMixin, View):
             subject = "Password successfully changed"
             current_site = get_current_site(self.request)
             message = render_to_string(
-                "email/change_password.html",
+                "mail/change_password.html",
                 {
                     "domain": current_site.domain,
                     "uid": urlsafe_base64_encode(force_bytes(user.pk)),
@@ -160,7 +160,7 @@ class ChangePasswordView(LoginRequiredMixin, View):
                 print(f"Error to send email: {error}")
             messages.success(request, "Password successfully changed")
 
-            return redirect("accounts:profile_edit")
+            return redirect("users:profile_edit")
         else:
             messages.error(request, "Please, correct the form")
 

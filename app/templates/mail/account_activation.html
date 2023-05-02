@@ -1,0 +1,4 @@
+{% autoescape off %}
+    Good day,<br>
+    Your account successfully created. To activate, go to <a href="http://{{domain}}{% url 'accounts:activate' uidb64=uid token=token %}">link</a>
+{% endautoescape %}
