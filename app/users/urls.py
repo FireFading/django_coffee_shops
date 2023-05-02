@@ -1,6 +1,7 @@
 from django.urls import path
 from users.views import (
     ChangePasswordView,
+    CustomLogoutView,
     DeleteUserView,
     LoginView,
     ProfileEditView,
@@ -10,7 +11,6 @@ from users.views import (
     UserPasswordDoneView,
     UserPasswordResetView,
     account_activate,
-    CustomLogoutView,
 )
 
 app_name = "accounts"

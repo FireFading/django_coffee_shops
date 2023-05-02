@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import (
+    LogoutView,
     PasswordResetCompleteView,
     PasswordResetConfirmView,
     PasswordResetDoneView,
@@ -23,7 +24,6 @@ from users.forms import LoginForm, SignupForm, UserPasswordChangeForm
 from users.models import User
 from users.tasks import send_mail
 from users.utils import account_activation_token
-from django.contrib.auth.views import LogoutView
 
 
 def account_activate(request, uidb64, token, backend="django.contrib.auth.backends.ModelBackend"):

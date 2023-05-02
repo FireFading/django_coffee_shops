@@ -13,9 +13,7 @@ class ProductsListView(ListView):
     paginate_by = 50
 
     def get_queryset(self):
-        self.filterset = queryset = MenuFilter(
-            self.request.GET, queryset=MenuItem.objects.filter()
-        )
+        self.filterset = queryset = MenuFilter(self.request.GET, queryset=MenuItem.objects.filter())
         return queryset.qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -80,4 +78,3 @@ class RemoveFromFavoritesView(View):
         request.user.favorites.remove(menu_item)
 
         return redirect("menu:detail", product_name=product_name)
-

@@ -1,5 +1,13 @@
 from django.urls import path
-from menu.views import CreateProductView, ProductDeleteView, ProductDetailView, ProductsListView, ProductUpdateView, AddToFavoritesView, RemoveFromFavoritesView
+from menu.views import (
+    AddToFavoritesView,
+    CreateProductView,
+    ProductDeleteView,
+    ProductDetailView,
+    ProductsListView,
+    ProductUpdateView,
+    RemoveFromFavoritesView,
+)
 
 app_name = "menu"
 

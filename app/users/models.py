@@ -3,6 +3,7 @@ from django.db.models import BooleanField, CharField, EmailField, ManyToManyFiel
 from django.utils.translation import gettext_lazy as _
 from menu.models import MenuItem
 
+
 class UserManager(BaseUserManager):
     def create_superuser(self, email, phone, password, **other_fields):
         other_fields.setdefault("is_staff", True)
@@ -34,7 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = BooleanField(default=False)
     is_staff = BooleanField(default=False)
 
-    favorites = ManyToManyField(MenuItem, blank=True, related_name='favored_by')
+    favorites = ManyToManyField(MenuItem, blank=True, related_name="favored_by")
 
     objects = UserManager()
 

@@ -1,7 +1,7 @@
 from django.db import models
-from users.models import User
 from django.utils import timezone
 from menu.models import MenuItem
+from users.models import User
 
 
 class Review(models.Model):
