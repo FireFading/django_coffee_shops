@@ -14,13 +14,21 @@
 - delete shops/menu item after confirmation
 - different roles for users
 - add comments for menu items for authorized users
+- ask questions
 - add to favorites/remove from favorites
 - self-created css and html
 
 ## Installation
 - in env.example all variables used in project, change it to .env, several variables that are common, already define as example, secret variables is empty
 - in app folder create `media/` folder
-- collect static
+- collect static:
+```bash
+  make static
+```
+- apply migrations:
+```bash
+  make migrate
+```
 ```bash
   docker exec -it django python manage.py collectstatic
 ```
@@ -39,7 +47,7 @@ OR `make up` - run without building, also you can prove -d flag to run as daemon
 ```bash
   docker compose down && docker network prune --force
 ```
-OR `make down`
+OR `make down` OR `make clean` to cleanup all containers and networks
 
 ## Migrations
 ```bash
