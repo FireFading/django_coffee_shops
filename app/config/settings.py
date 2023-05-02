@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     "django_filters",
     "crispy_forms",
     "widget_tweaks",
+    "home",
     "users",
     "shops",
     "menu",

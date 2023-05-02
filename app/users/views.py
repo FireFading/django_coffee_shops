@@ -39,13 +39,13 @@ def account_activate(request, uidb64, token, backend="django.contrib.auth.backen
     user.save()
     messages.success(request, "Your account has been activated")
     login(request, user, backend=backend)
-    return redirect("menu:home")
+    return redirect("base:home")
 
 
 class LoginView(FormView):
     template_name = "users/login.html"
     form_class = LoginForm
-    success_url = reverse_lazy("menu:home")
+    success_url = reverse_lazy("base:home")
 
     def form_valid(self, form):
         email = form.cleaned_data.get("email")
@@ -119,7 +119,7 @@ class UserPasswordCompleteView(PasswordResetCompleteView):
 
 class DeleteUserView(LoginRequiredMixin, DeleteView):
     model = User
-    success_url = reverse_lazy("menu:home")
+    success_url = reverse_lazy("base:home")
     template_name = "users/profile_delete_confirm.html"
 
 

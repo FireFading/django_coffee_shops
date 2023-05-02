@@ -1,10 +1,9 @@
-from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from django.urls import reverse, reverse_lazy
 from django.views.generic import DetailView, ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from shops.filters import ShopFilter
 from shops.models import Shop
-from django.urls import reverse
 
 
 class ShopsListView(ListView):
@@ -40,22 +39,22 @@ class CreateShopView(CreateView):
 
 class ShopUpdateView(UpdateView):
     model = Shop
-    fields = ['address', "phone_number", "opening_time", "closing_time"]
-    template_name = 'shops/edit.html'
+    fields = ["address", "phone_number", "opening_time", "closing_time"]
+    template_name = "shops/edit.html"
 
     def get_object(self, queryset=None):
-        shop_name = self.kwargs.get('shop_name')
+        shop_name = self.kwargs.get("shop_name")
         return get_object_or_404(Shop, name=shop_name)
 
     def get_success_url(self):
-        return reverse('shops:detail', kwargs={'shop_name': self.object.name})
+        return reverse("shops:detail", kwargs={"shop_name": self.object.name})
 
 
 class ShopDeleteView(DeleteView):
     model = Shop
-    template_name = 'shops/delete.html'
-    success_url = reverse_lazy('shops:all')
+    template_name = "shops/delete.html"
+    success_url = reverse_lazy("shops:all")
 
     def get_object(self, queryset=None):
-        shop_name = self.kwargs.get('shop_name')
+        shop_name = self.kwargs.get("shop_name")
         return get_object_or_404(Shop, name=shop_name)

@@ -1,14 +1,9 @@
-from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView
+from django.shortcuts import get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from menu.filters import MenuFilter
-from django.shortcuts import get_object_or_404
 from menu.models import MenuItem
-from django.urls import reverse
-
-
-class HomeView(TemplateView):
-    template_name = "base/home.html"
 
 
 class ProductsListView(ListView):
@@ -44,22 +39,22 @@ class CreateProductView(CreateView):
 
 class ProductUpdateView(UpdateView):
     model = MenuItem
-    fields = ['price', "description", "shop"]
-    template_name = 'menu/edit.html'
+    fields = ["price", "description", "shop"]
+    template_name = "menu/edit.html"
 
     def get_object(self, queryset=None):
-        product_name = self.kwargs.get('product_name')
+        product_name = self.kwargs.get("product_name")
         return get_object_or_404(MenuItem, name=product_name)
 
     def get_success_url(self):
-        return reverse('menu:detail', kwargs={'product_name': self.object.name})
+        return reverse("menu:detail", kwargs={"product_name": self.object.name})
 
 
 class ProductDeleteView(DeleteView):
     model = MenuItem
-    template_name = 'menu/delete.html'
-    success_url = reverse_lazy('menu:catalog')
+    template_name = "menu/delete.html"
+    success_url = reverse_lazy("menu:catalog")
 
     def get_object(self, queryset=None):
-        product_name = self.kwargs.get('product_name')
+        product_name = self.kwargs.get("product_name")
         return get_object_or_404(MenuItem, name=product_name)
