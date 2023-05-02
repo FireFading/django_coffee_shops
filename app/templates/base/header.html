@@ -5,7 +5,7 @@
             <h1>Coffee</h1>
         </a>
         <nav am-layout="horizontal">
-            <a href="{% url 'menu:catalog' %}">Products</a>
+            <a href="{% url 'menu:catalog' %}">Menu</a>
             <a href="{% url 'shops:all' %}">Shops</a>
 
             {% if user.is_authenticated %}

@@ -1,5 +1,5 @@
 from django_filters import CharFilter, FilterSet, ModelChoiceFilter, NumberFilter, OrderingFilter
-from menu.models import Product, Category
+from menu.models import Category, Product
 from shops.models import Shop
 
 

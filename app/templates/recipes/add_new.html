@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <form class="form-control" action="{% url 'recipes:new' %}" method="post">
+        <h2 class="text-center">New Recipe:</h2>
+        {% csrf_token %}
+
+        {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for field in form %}
+            {% render_field field class="form-control form-control-sm" placeholder=field.name %}
+        {% endfor %}
+        <button class="form-button" type="submit" value="AddMenuItem">Add</button><br>
+    </form>
+</div>
+{% endblock %}

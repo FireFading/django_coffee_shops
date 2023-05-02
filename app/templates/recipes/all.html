@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+{% include 'base/filter_form.html' %}
+
+    <div class="catalog_items">
+        {% for recipe in recipes %}
+            <div class="product-card">
+                <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
+                <div class="product-info">
+                    <h3>{{recipe.name}}</h3>
+                    <p>{{recipe.description}} $</p><br>
+                    <a href="{% url 'recipes:detail' recipe.name %}">Show detail</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% if user.is_authenticated %}
+    <div class="position-button">
+        <a href="{% url 'recipes:new' %}">
+            <button>Add New Recipe</button>
+        </a>
+    </div>
+{% endif %}
+{% endblock %}

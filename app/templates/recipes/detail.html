@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2 class="detail-title">{{recipe.name}}</h2>
+
+    <div class="detail-page">
+
+        <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
+
+        <div class="product-info">
+            <p><strong>author:</strong>{{recipe.user}} $</p>
+            <p><strong>products:</strong>{{recipe.products}}</p>
+            <p><strong>description:</strong>{{recipe.description}}</p>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

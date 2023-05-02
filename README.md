@@ -5,11 +5,12 @@
 - reset password with email
 - email subscription with celery
 - edit profile information
-- get all shops
-- get all products
-- filter & ordering information about shops/products by shop/category, price/name, etc
+- get all shops/products/recipes
+- add new shop/product/recipe
+- filter & ordering information about shops by name/address, etc
+- filter & ordering information about products by name/price/category/shop, etc
+- filter & ordering information about recipes by name/product, etc
 - get detail information about shop/product
-- add new shop/product
 - edit shops/product
 - delete shops/product after confirmation
 - different roles for users
