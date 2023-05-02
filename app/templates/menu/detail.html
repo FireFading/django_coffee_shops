@@ -46,6 +46,11 @@
         <a href="{% url 'menu:delete' product.name %}">
             <button class="danger">Delete</button>
         </a>
+
+        <form action="{% url 'menu:like' product.name %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Like</button>
+        </form>
     {% endif %}
 </div>
 

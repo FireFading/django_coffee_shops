@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container">
+    {{object.name}}
+    <h2 class="detail-title">Favorites:</h2>
+
+    <div class="detail-page">
+        {% for product in object.favorites.all %}
+            <div class="product-info">
+                <strong>{{product.name}}</strong>
+                <a href="{% url 'menu:detail' product.name %}">Show more</a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

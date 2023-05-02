@@ -1,5 +1,5 @@
 from django.urls import path
-from menu.views import CreateProductView, ProductDeleteView, ProductDetailView, ProductsListView, ProductUpdateView
+from menu.views import CreateProductView, ProductDeleteView, ProductDetailView, ProductsListView, ProductUpdateView, AddToFavoritesView
 
 app_name = "menu"
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path("<str:product_name>/", ProductDetailView.as_view(), name="detail"),
     path("edit/<str:product_name>/", ProductUpdateView.as_view(), name="edit"),
     path("delete/<str:product_name>/", ProductDeleteView.as_view(), name="delete"),
+    path("like/<str:product_name>/", AddToFavoritesView.as_view(), name="like"),
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
-from django.db.models import BooleanField, CharField, EmailField
+from django.db.models import BooleanField, CharField, EmailField, ManyToManyField
 from django.utils.translation import gettext_lazy as _
-
+from menu.models import MenuItem
 
 class UserManager(BaseUserManager):
     def create_superuser(self, email, phone, password, **other_fields):
@@ -33,6 +33,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone = CharField(max_length=100, blank=True, null=True, verbose_name="Phone")
     is_active = BooleanField(default=False)
     is_staff = BooleanField(default=False)
+
+    favorites = ManyToManyField(MenuItem, blank=True, related_name='favored_by')
 
     objects = UserManager()
 

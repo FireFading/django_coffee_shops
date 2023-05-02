@@ -73,7 +73,7 @@ class SignupView(FormView):
 
 
 class ProfileEditView(LoginRequiredMixin, UpdateView):
-    template_name = "user/profile_edit.html"
+    template_name = "users/profile_edit.html"
     model = User
     fields = ["phone", "email"]
     success_url = reverse_lazy("users:profile_edit")
@@ -168,4 +168,3 @@ class ChangePasswordView(LoginRequiredMixin, View):
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy("base:home")
-    # template_name = "users/logout.html"

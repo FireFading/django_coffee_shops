@@ -1,6 +1,6 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, View
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from menu.filters import MenuFilter
 from menu.models import MenuItem
@@ -13,7 +13,9 @@ class ProductsListView(ListView):
     paginate_by = 50
 
     def get_queryset(self):
-        self.filterset = queryset = MenuFilter(self.request.GET, queryset=MenuItem.objects.filter())
+        self.filterset = queryset = MenuFilter(
+            self.request.GET, queryset=MenuItem.objects.filter()
+        )
         return queryset.qs.distinct()
 
     def get_context_data(self, **kwargs):
@@ -58,3 +60,13 @@ class ProductDeleteView(DeleteView):
     def get_object(self, queryset=None):
         product_name = self.kwargs.get("product_name")
         return get_object_or_404(MenuItem, name=product_name)
+
+
+class AddToFavoritesView(View):
+    def post(self, request, *args, **kwargs):
+        product_name = kwargs.get("product_name")
+        menu_item = get_object_or_404(MenuItem, name=product_name)
+
+        request.user.favorites.add(menu_item)
+
+        return redirect("menu:detail", product_name=product_name)
