@@ -1,4 +1,6 @@
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic.edit import CreateView
 from menu.filters import MenuFilter
 from menu.models import MenuItem
 
@@ -29,3 +31,10 @@ class ProductDetailView(DetailView):
     slug_field = "name"
     slug_url_kwarg = "product_name"
     context_object_name = "product"
+
+
+class CreateProductView(CreateView):
+    model = MenuItem
+    fields = "__all__"
+    template_name = "menu/add_new.html"
+    success_url = reverse_lazy("menu:catalog")

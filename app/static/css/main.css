@@ -72,7 +72,7 @@ a {
 }
 
 *:before,
-*:after{
+*:after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -265,4 +265,10 @@ form .message {
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
+}
+
+.position-button {
+    position: fixed;
+    bottom: 80px;
+    right: 80px;
 }

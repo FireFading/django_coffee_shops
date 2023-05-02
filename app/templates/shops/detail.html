@@ -4,12 +4,12 @@
 {% block content %}
 <div class="container">
 
-<img class="shop-img" src="{% static 'img/shop.jpg' %}" alt="">
+<img class="product-img" src="{% static 'img/shop.jpg' %}" alt="">
 
-    <div class="shop-info">
+    <div class="product-info">
     <h3>{{shop.name}}</h3>
-    <p>{{shop.address}}</p><br>
-    <p>{{shop.phone_number}}</p>
+    <p><strong>address:</strong> {{shop.address}}</p><br>
+    <p><strong>phone:</strong> {{shop.phone_number}}</p>
 
 </div>
 

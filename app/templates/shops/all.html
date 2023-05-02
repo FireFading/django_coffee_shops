@@ -13,12 +13,18 @@
     <img class="product-img" src="{% static 'img/shop.jpg' %}" alt="">
     <div class="product-info">
         <h3>{{shop.name}}</h3>
-        <p>{{shop.address}} $</p><br>
+        <p>{{shop.address}}</p><br>
         <strong>{{product.town}}</strong><br>
         <a href="{% url 'shops:detail' shop.name %}">Show detail</a>
     </div>
 </div>
 
 {% endfor %}
+</div>
+
+<div class="position-button">
+    <a href="{% url 'shops:new' %}">
+        <button>Add New Shop</button>
+    </a>
 </div>
 {% endblock %}

@@ -1,4 +1,6 @@
+from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView
 from shops.filters import ShopFilter
 from shops.models import Shop
 
@@ -25,3 +27,10 @@ class ShopDetailView(DetailView):
     slug_field = "name"
     slug_url_kwarg = "shop_name"
     context_object_name = "shop"
+
+
+class CreateShopView(CreateView):
+    model = Shop
+    fields = "__all__"
+    template_name = "shops/add_new.html"
+    success_url = reverse_lazy("shops:all")
