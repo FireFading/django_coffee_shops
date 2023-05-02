@@ -17,8 +17,6 @@
 - add to favorites/remove from favorites
 - self-created css and html
 
-![image](https://user-images.githubusercontent.com/91421235/235482707-02124c5d-3150-4063-bc2c-e011dd5602c2.png)
-
 ## Installation
 - in env.example all variables used in project, change it to .env, several variables that are common, already define as example, secret variables is empty
 - in app folder create `media/` folder
