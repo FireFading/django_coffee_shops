@@ -10,6 +10,7 @@
 - get detail information about shop/menu item
 - add new shop/menu item
 - edit shops/menu item
+- delete shops/menu item after confirmation
 - different roles for users
 - self-created css and html
 

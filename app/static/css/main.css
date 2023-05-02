@@ -55,10 +55,12 @@ button {
     background: #fff;
     margin-bottom: 50px;
     box-shadow: 0 3px 20px 0 #0000003b;
+    transition: background-color 1s;
 }
 
 button:hover {
     cursor: pointer;
+    background-color: #c8babaeb;
 }
 
 a {
@@ -293,5 +295,17 @@ form .message {
 }
 
 .danger:hover {
-    background-color:red
+    background-color: #ea2009d3;
+}
+
+.cancel:hover {
+    background-color: #08641cc4;
+}
+
+.danger:focus,
+.danger:active,
+.cancel:focus,
+.cancel:active {
+    background-color: black;
+    transition: none;
 }
