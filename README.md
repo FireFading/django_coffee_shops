@@ -12,6 +12,7 @@
 - edit shops/menu item
 - delete shops/menu item after confirmation
 - different roles for users
+- add comments for menu items for authorized users
 - self-created css and html
 
 ![image](https://user-images.githubusercontent.com/91421235/235482707-02124c5d-3150-4063-bc2c-e011dd5602c2.png)
