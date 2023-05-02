@@ -23,20 +23,19 @@
 - in app folder create `media/` folder
 - collect static:
 ```bash
-  make static
-```
-- apply migrations:
-```bash
-  make migrate
-```
-```bash
   docker exec -it django python manage.py collectstatic
 ```
+OR `make static`
+- apply migrations:
+```bash
+  docker exec -it django python manage.py makemigrations && docker exec -it django python manage.py migrate
+```
+OR `make migrate`
 - createsuperuser
 ```bash
   docker exec -it django python manage.py createsuperuser
 ```
-
+OR `make superuser`
 ## Run Locally
 ```bash
   docker compose up
