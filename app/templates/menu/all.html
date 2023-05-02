@@ -22,9 +22,11 @@
     {% endfor %}
 </div>
 
-<div class="position-button">
-    <a href="{% url 'menu:new' %}">
-        <button>Add New Product</button>
-    </a>
-</div>
+{% if user.is_authenticated %}
+    <div class="position-button">
+        <a href="{% url 'menu:new' %}">
+            <button>Add New Product</button>
+        </a>
+    </div>
+{% endif %}
 {% endblock %}

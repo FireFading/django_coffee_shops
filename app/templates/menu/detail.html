@@ -36,15 +36,17 @@
 </div>
 
 <div class="position-button">
-    <a href="{% url 'reviews:add-comment' product.name %}">
-        <button>Add comment</button>
-    </a>
-    <a href="{% url 'menu:edit' product.name %}">
-        <button>Edit</button>
-    </a>
-    <a href="{% url 'menu:delete' product.name %}">
-        <button class="danger">Delete</button>
-    </a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'reviews:add-comment' product.name %}">
+            <button>Add comment</button>
+        </a>
+        <a href="{% url 'menu:edit' product.name %}">
+            <button>Edit</button>
+        </a>
+        <a href="{% url 'menu:delete' product.name %}">
+            <button class="danger">Delete</button>
+        </a>
+    {% endif %}
 </div>
 
 {% endblock %}
