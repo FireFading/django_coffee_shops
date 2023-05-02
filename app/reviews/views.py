@@ -1,13 +1,13 @@
-from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse_lazy
-from django.views.generic.edit import FormView
-from django.views.generic import ListView
-from reviews.models import Question
-from menu.models import MenuItem
-from reviews.forms import ReviewForm, QuestionForm
-from django.core.mail import EmailMessage
 from django.conf import settings
+from django.core.mail import EmailMessage
+from django.shortcuts import get_object_or_404, redirect
 from django.template.loader import render_to_string
+from django.urls import reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.edit import FormView
+from menu.models import MenuItem
+from reviews.forms import QuestionForm, ReviewForm
+from reviews.models import Question
 
 
 class AddCommentView(FormView):
@@ -42,17 +42,17 @@ class AskQuestionView(FormView):
         question.save()
         subject = "Thank you for your question"
         message = render_to_string(
-                "mail/thanks_for_question.html",
-                {
-                    "question": question,
-                },
-            )
+            "mail/thanks_for_question.html",
+            {
+                "question": question,
+            },
+        )
         send_email = EmailMessage(
-                subject,
-                message,
-                settings.EMAIL_HOST_USER,
-                [question.user.email],
-            )
+            subject,
+            message,
+            settings.EMAIL_HOST_USER,
+            [question.user.email],
+        )
         try:
             send_email.send()
         except Exception as error:
