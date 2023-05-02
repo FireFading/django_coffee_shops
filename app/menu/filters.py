@@ -1,5 +1,5 @@
 from django_filters import CharFilter, FilterSet, ModelChoiceFilter, NumberFilter, OrderingFilter
-from menu.models import Product
+from menu.models import Product, Category
 from shops.models import Shop
 
 
@@ -16,6 +16,7 @@ class MenuFilter(FilterSet):
     )
 
     shop = ModelChoiceFilter(field_name="shop", queryset=Shop.objects.all(), to_field_name="name")
+    category = ModelChoiceFilter(field_name="category", queryset=Category.objects.all(), to_field_name="name")
 
     def filter_available(self, queryset, name, value):
         lookup = "__".join([name, "isnull"])

@@ -12,6 +12,7 @@
         <div class="product-info">
             <p><strong>price:</strong>{{product.price}} $</p>
             <p><strong>shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
+            <p><strong>category:</strong>{{product.category}}</strong></p>
             <p><strong>description:</strong>{{product.description}}</p>
         </div>
 
@@ -20,19 +21,23 @@
 </div>
 
 <div class="container">
-    <h2 class="detail-title">Comments</h2>
-    <div class="comments">
-        {% for comment in product.comments.all %}
-            <div class="comment-card">
-                <div class="comment-title">
-                    <strong>{{comment.user}}</strong>
+    {% if comments %}
+        <h2 class="detail-title">Comments</h2>
+        <div class="comments">
+            {% for comment in product.comments.all %}
+                <div class="comment-card">
+                    <div class="comment-title">
+                        <strong>{{comment.user}}</strong>
+                    </div>
+                    <div class="comment-content">
+                        <p>{{comment.text}}</p>
+                    </div>
                 </div>
-                <div class="comment-content">
-                    <p>{{comment.text}}</p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h2 class="detail-title">No comments yet</h2>
+    {% endif %}
 </div>
 
 <div class="position-button">

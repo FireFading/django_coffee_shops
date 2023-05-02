@@ -10,6 +10,11 @@ class Review(models.Model):
     text = models.TextField(verbose_name="Comment")
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Created at")
 
+    class Meta:
+        verbose_name = "Review"
+        verbose_name_plural = "Reviews"
+        ordering = ["-created_at"]
+
     def __str__(self):
         return f"{self.text[:50]}..."
 
@@ -19,6 +24,11 @@ class Question(models.Model):
     summary = models.CharField(max_length=200, verbose_name="Summary")
     text = models.TextField(verbose_name="Question")
     created_at = models.DateTimeField(default=timezone.now, verbose_name="Created at")
+
+    class Meta:
+        verbose_name = "Question"
+        verbose_name_plural = "Questions"
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{self.text[:50]}..."

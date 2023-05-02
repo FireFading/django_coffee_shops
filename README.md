@@ -6,14 +6,14 @@
 - email subscription with celery
 - edit profile information
 - get all shops
-- get all menu items
-- filter & ordering information about shops/menu items
-- get detail information about shop/menu item
-- add new shop/menu item
-- edit shops/menu item
-- delete shops/menu item after confirmation
+- get all products
+- filter & ordering information about shops/products by shop/category, price/name, etc
+- get detail information about shop/product
+- add new shop/product
+- edit shops/product
+- delete shops/product after confirmation
 - different roles for users
-- add comments for menu items for authorized users
+- add comments for products for authorized users
 - ask questions
 - add to favorites/remove from favorites
 - self-created css and html
