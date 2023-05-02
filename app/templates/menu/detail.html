@@ -3,15 +3,18 @@
 
 {% block content %}
 <div class="container">
+    <h2 class="detail-title">{{product.name}}</h2>
 
-<img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
+    <div class="detail-page">
 
-    <div class="product-info">
-    <h3>{{product.name}}</h3>
-    <p>{{product.price}} $</p><br>
-    <strong>{{product.town}}</strong><br>
+        <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
 
-</div>
+        <div class="product-info">
+            <p>{{product.price}} $</p>
+            <p><strong>shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
+            <p><strong>description:</strong>{{product.description}}</p>
+        </div>
+    </div>
 
 </div>
 

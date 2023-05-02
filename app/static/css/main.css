@@ -272,3 +272,18 @@ form .message {
     bottom: 80px;
     right: 80px;
 }
+
+.detail-page {
+    margin: auto;
+    padding: 0px 20px;
+    margin-top: 80px;
+    margin-left: 120px;
+    display: flex;
+    justify-content: left;
+}
+
+.detail-title {
+    text-align: center;
+    position: absolute;
+    margin-bottom: 50px;
+}
