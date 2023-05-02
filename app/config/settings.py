@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "widget_tweaks",
     "home",
+    "reviews",
     "users",
     "shops",
     "menu",

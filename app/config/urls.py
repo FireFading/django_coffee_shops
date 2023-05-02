@@ -7,4 +7,5 @@ urlpatterns = [
     path("catalog/", include("menu.urls", namespace="menu")),
     path("shops/", include("shops.urls", namespace="shops")),
     path("users/", include("users.urls", namespace="users")),
+    path("reviews/", include("reviews.urls", namespace="reviews")),
 ]

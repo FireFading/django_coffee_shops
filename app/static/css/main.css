@@ -259,7 +259,7 @@ footer {
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 300;
 }
 
@@ -282,6 +282,7 @@ form .message {
     margin-left: 120px;
     display: flex;
     justify-content: left;
+    font-size: 17px;
 }
 
 .detail-title {
@@ -308,4 +309,35 @@ form .message {
 .cancel:active {
     background-color: black;
     transition: none;
+}
+
+.comments {
+    margin: auto;
+    margin-top: 100px;
+    margin-left: 200px;
+    padding: 20px;
+    justify-content: left;
+    border-color: #1f1f1f;
+    background-image: linear-gradient(135deg, #d9cfcf85 10%, #fab79380 100%);
+    width: 70%;
+}
+
+.comment-content {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.comment-card {
+    border-color: #1f1f1f;
+    box-shadow: 0 0;
+    padding: 20px;
+    border: 2px solid #1f1d1d;
+    width: 100%;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 10px;
+}
+
+.comment-title {
+    border-bottom: 1px solid black;
+    font-size: 16px;
 }

@@ -10,7 +10,7 @@
         <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
 
         <div class="product-info">
-            <p>{{product.price}} $</p>
+            <p><strong>price:</strong>{{product.price}} $</p>
             <p><strong>shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
             <p><strong>description:</strong>{{product.description}}</p>
         </div>
@@ -19,7 +19,26 @@
 
 </div>
 
+<div class="container">
+    <h2 class="detail-title">Comments</h2>
+    <div class="comments">
+        {% for comment in product.comments.all %}
+            <div class="comment-card">
+                <div class="comment-title">
+                    <strong>{{comment.user}}</strong>
+                </div>
+                <div class="comment-content">
+                    <p>{{comment.text}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 <div class="position-button">
+    <a href="{% url 'reviews:add-comment' product.name %}">
+        <button>Add comment</button>
+    </a>
     <a href="{% url 'menu:edit' product.name %}">
         <button>Edit</button>
     </a>
