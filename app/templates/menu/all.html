@@ -9,16 +9,15 @@
 
 <div class="catalog_items">
     {% for product in products %}
-    <div class="product-card">
-        <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
-        <div class="product-info">
-            <h3>{{product.name}}</h3>
-            <p>{{product.price}} $</p><br>
-            <strong>{{product.town}}</strong><br>
-            <a href="{% url 'menu:detail' product.name %}">Show detail</a>
+        <div class="product-card">
+            <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
+            <div class="product-info">
+                <h3>{{product.name}}</h3>
+                <p>{{product.price}} $</p><br>
+                <strong>{{product.town}}</strong><br>
+                <a href="{% url 'menu:detail' product.name %}">Show detail</a>
+            </div>
         </div>
-    </div>
-
     {% endfor %}
 </div>
 

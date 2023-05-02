@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container">
+    <form class="form-control" action="{% url 'reviews:ask-question' %}" method="post">
+        <h2 class="text-center">New Question from {{user.email}}:</h2>
+        {% csrf_token %}
+
+        {% for message in messages %}
+            <div class="alert alert-primary" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for field in form %}
+            {% render_field field class="form-control form-control-sm" placeholder=field.name %}
+        {% endfor %}
+        <button class="form-button" type="submit" value="AskQuestion">Ask Question</button><br>
+    </form>
+</div>
+{% endblock %}

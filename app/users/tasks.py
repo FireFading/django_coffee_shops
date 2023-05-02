@@ -28,5 +28,8 @@ def send_mail(request, data, user: User):
         settings.EMAIL_HOST_USER,
         [email],
     )
-    if send_email.send():
-        return f"/accounts/login/?command=verification&email={email}"
+    try:
+        if send_email.send():
+            return f"/accounts/login/?command=verification&email={email}"
+    except Exception as error:
+        print(f"Error to send email: {error}")

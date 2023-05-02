@@ -154,7 +154,10 @@ class ChangePasswordView(LoginRequiredMixin, View):
                 settings.EMAIL_HOST_USER,
                 [user.email],
             )
-            send_email.send()
+            try:
+                send_email.send()
+            except Exception as error:
+                print(f"Error to send email: {error}")
             messages.success(request, "Password successfully changed")
 
             return redirect("accounts:profile_edit")

@@ -1,0 +1,35 @@
+{% extends 'base/base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        {% if questions %}
+            <h2 class="detail-title">Questions:</h2>
+            <div class="comments">
+                {% for question in questions %}
+                    <div class="comment-card">
+                        <div class="comment-title">
+                            <h2>{{question.summary}}</h2>
+                            <small>by user {{question.user}}</small>
+                        </div>
+                        <div class="comment-content">
+                            <p>{{question.text}}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <h2 class="detail-title">No question yet</h2>
+        {% endif %}
+    </div>
+
+    {% if user.is_authenticated %}
+        <div class="position-button">
+            <a href="{% url 'reviews:ask-question' %}">
+                <button>Ask Question</button>
+            </a>
+        </div>
+    {% endif %}
+
+{% endblock %}
