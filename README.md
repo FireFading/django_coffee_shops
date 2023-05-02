@@ -1,12 +1,16 @@
 ## Features
 - registration/authentication
-- custom User model with custom UserManager that without username
+- custom User model with custom UserManager without username
 - change password
 - reset password with email
 - email subscription with celery
 - get all shops
 - get all menu items
+- filter & ordering information about shops/menu items
 - get detail information about shop/menu item
+- add new shop/menu item
+- edit shops/menu item
+- different roles for users
 - self-created css and html
 
 ![image](https://user-images.githubusercontent.com/91421235/235482707-02124c5d-3150-4063-bc2c-e011dd5602c2.png)

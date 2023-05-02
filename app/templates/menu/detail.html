@@ -14,8 +14,15 @@
             <p><strong>shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
             <p><strong>description:</strong>{{product.description}}</p>
         </div>
+
     </div>
 
+</div>
+
+<div class="position-button">
+    <a href="{% url 'menu:edit' product.name %}">
+        <button>Edit</button>
+    </a>
 </div>
 
 {% endblock %}

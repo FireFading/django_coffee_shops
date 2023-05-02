@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="container">
-    <form class="form-control" action="{% url 'shops:new' %}" method="post">
-        <h2 class="text-center">New Shop:</h2>
+    <form class="form-control" action="{% url 'menu:edit' object.name %}" method="post">
+        <h2 class="text-center">Edit Product "{{object.name}}":</h2>
         {% csrf_token %}
 
         {% for message in messages %}
@@ -17,7 +17,7 @@
         {% for field in form %}
             {% render_field field class="form-control form-control-sm" placeholder=field.name %}
         {% endfor %}
-        <button class="form-button" type="submit" value="AddShop">Add</button><br>
+        <button class="form-button" type="submit" value="EditMenuItem">Edit</button><br>
     </form>
 </div>
 {% endblock %}

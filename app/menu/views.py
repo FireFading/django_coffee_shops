@@ -1,8 +1,10 @@
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView, TemplateView, UpdateView
 from django.views.generic.edit import CreateView
 from menu.filters import MenuFilter
+from django.shortcuts import get_object_or_404
 from menu.models import MenuItem
+from django.urls import reverse
 
 
 class HomeView(TemplateView):
@@ -38,3 +40,17 @@ class CreateProductView(CreateView):
     fields = "__all__"
     template_name = "menu/add_new.html"
     success_url = reverse_lazy("menu:catalog")
+
+
+class ProductUpdateView(UpdateView):
+    model = MenuItem
+    fields = ['price', "description", "shop"]
+    template_name = 'menu/edit.html'
+
+    def get_object(self, queryset=None):
+        product_name = self.kwargs.get('product_name')
+        return get_object_or_404(MenuItem, name=product_name)
+
+    def get_success_url(self):
+        return reverse('menu:detail', kwargs={'product_name': self.object.name})
+
