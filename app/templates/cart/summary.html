@@ -1,34 +1,65 @@
 {% extends 'base/base.html' %}
 {% load cart_tags %}
-{% get_cart as cart %}
 
 {% block content %}
 <div class="container">
+    {% get_cart as cart %}
     {% if not cart.items %}
         <h2 class="detail-title">Your cart is empty</h2>
     {% else %}
         <h2 class="detail-title">Your cart</h2>
-        {% for item in cart.items %}
-            <div class="product-info">
-                <p><strong>price:</strong>{{item.product.price}} $</p>
-                <a href="{% url 'menu:detail' item.product.name %}">{{ item.product.name }}</a>
-                <p>{{item.quantity}}</p>
-            </div>
-            <form action="{% url 'orders:add_product' product_id=item.product.id next=request.get_full_path %}" method="post">
+
+        <div class="catalog_items" style="margin-top: 70px;">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for item in cart.items %}
+                    <tr>
+                        <td>
+                            <p><strong>
+                                <a href="{% url 'menu:detail' item.product.name %}" style="color: black">{{ item.product.name }}</a>
+                            </strong></p>
+                        </td>
+                        <td><p>{{item.product.price}} $</p></td>
+                        <td><p>{{item.quantity}}</p></td>
+                        <td><p><strong>{{ item.subtotal }}</strong></p></td>
+                        <td>
+                            <form action="{% url 'orders:add_product' product_id=item.product.id next=request.get_full_path %}" method="post">
+                            {% csrf_token %}
+                                <button type="submit">+</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'orders:remove_product' product_id=item.product.id next=request.get_full_path %}" method="post">
+                            {% csrf_token %}
+                                <button type="submit">-</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{% url 'orders:remove_products' product_id=item.product.id next=request.get_full_path %}" method="post">
+                            {% csrf_token %}
+                                <button class="danger" type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <td>Total price:</td>
+                <td>{{ cart.total }}</td>
+            </table>
+
+            <form class="form-control" action="{% url 'orders:order' %}" method="post">
                 {% csrf_token %}
-                <button type="submit">+</button>
+                <input class="form-control" name="comment" placeholder="Your comment..">
+                <button class="form-button" type="submit">Create order</button>
             </form>
-            <form action="{% url 'orders:remove_products' product_id=item.product.id next=request.get_full_path %}" method="post">
-                {% csrf_token %}
-                <button class="danger" type="submit">Delete</button>
-            </form>
-            <strong>{{ item.subtotal }}</strong>
-        {% endfor %}
-        <form class="form-control" action="{% url 'orders:order' %}" method="post">
-            {% csrf_token %}
-            <input name="comment">
-            <button class="form-control" type="submit">Create order</button>
-        </form>
+        </div>
     {% endif %}
 
     {% if messages %}
@@ -36,5 +67,12 @@
             <p>{{ message }}</p>
         {% endfor %}
     {% endif %}
+</div>
+
+<div class="position-button">
+    <form action="{% url 'orders:order' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Create order</button>
+    </form>
 </div>
 {% endblock %}

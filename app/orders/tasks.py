@@ -24,8 +24,11 @@ def send_mail_confirm_order(order, request):
         settings.EMAIL_HOST_USER,
         [request.user.email],
     )
-    if send_email.send():
-        messages.success(request, "Mail with your order details has been sent successfully")
+    try:
+        if send_email.send():
+            messages.success(request, "Mail with your order details has been sent successfully")
+    except Exception as error:
+        print("Failed to send mail: ", error)
 
 
 @shared_task(name="send_email_order_to_admin")
@@ -41,4 +44,7 @@ def send_mail_order_to_admin(order):
         settings.EMAIL_HOST_USER,
         [settings.EMAIL_ADMIN],
     )
-    send_email.send()
+    try:
+        send_email.send()
+    except Exception as error:
+        print("Failed to send mail: ", error)

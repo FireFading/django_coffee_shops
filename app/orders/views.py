@@ -15,8 +15,7 @@ class CartView(TemplateView):
 def add_product(request, product_id, next):
     if request.method == "POST":
         cart = Cart(request.session)
-        product_id = request.GET.get("product_id")
-        product = get_object_or_404(Product, name=product_id)
+        product = get_object_or_404(Product, id=product_id)
         cart.add(product, price=product.price)
     request.session.modified = True
     return redirect(next)
@@ -25,7 +24,7 @@ def add_product(request, product_id, next):
 def remove_product(request, product_id, next):
     if request.method == "POST":
         cart = Cart(request.session)
-        product = get_object_or_404(Product, name=product_id)
+        product = get_object_or_404(Product, id=product_id)
         cart.remove_single(product)
     request.session.modified = True
     return redirect(next)
@@ -34,7 +33,7 @@ def remove_product(request, product_id, next):
 def remove_products(request, product_id, next):
     if request.method == "POST":
         cart = Cart(request.session)
-        product = get_object_or_404(Product, name=product_id)
+        product = get_object_or_404(Product, id=product_id)
         cart.remove(product)
     request.session.modified = True
     return redirect(next)
@@ -44,10 +43,10 @@ def remove_products(request, product_id, next):
 def create_order(request):
     if request.method == "POST":
         user = request.user
-        message = request.get("comment")
+        message = request.GET.get("comment")
         cart = Cart(request.session)
         if cart.count > 0:
-            order = Order.objects.create(user=user)
+            order = Order.objects.create(user=user, message=message)
             total_price = 0
             for item in cart.items:
                 product = Product.objects.get(pk=item.product.id)
@@ -55,9 +54,8 @@ def create_order(request):
                 total_price += round((quantity * product.price), 2)
                 OrderItem.objects.create(
                     order=order,
-                    product=product,
+                    product=product.name,
                     quantity=quantity,
-                    message=message,
                 )
             order.total_price = total_price
             order.save()

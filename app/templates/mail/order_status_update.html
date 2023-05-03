@@ -5,7 +5,7 @@ Your order is confirmed!
 Total order price: {{total_price}}<br>
 
 {% for item in items.all %}
-    <a href="{% url 'menu:detail' item.product_name %}">{{item.product}}</a>::{{item.quantity}}<br>
+    {{item.product}}::{{item.quantity}}<br>
 
 {% endfor %}
 
