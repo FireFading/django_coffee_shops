@@ -9,7 +9,7 @@
             {% csrf_token %}
             <button class="danger" type="submit">Delete</button>
         </form>
-        <a href="{% url 'menu:catalog' %}">
+        <a href="{% url 'menu:detail' object.name %}">
             <button class="cancel">Cancel</button>
         </a>
     </div>

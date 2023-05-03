@@ -10,10 +10,10 @@
         <img class="product-img" src="{% static 'img/coffee.jpg' %}" alt="">
 
         <div class="product-info">
-            <p><strong>price:</strong>{{product.price}} $</p>
-            <p><strong>shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
-            <p><strong>category:</strong>{{product.category}}</strong></p>
-            <p><strong>description:</strong>{{product.description}}</p>
+            <p><strong class="description">price:</strong>{{product.price}} $</p>
+            <p><strong  class="description">shop:</strong><a href="{% url 'shops:detail' product.shop.name %}">{{product.shop}}</a></p>
+            <p><strong  class="description">category:</strong>{{product.category}}</strong></p>
+            <p><strong  class="description">description:</strong>{{product.description}}</p>
         </div>
 
     </div>
@@ -41,25 +41,27 @@
 </div>
 
 <div class="position-button">
+    <form action="{% url 'orders:add_product' product_id=product.id next=request.get_full_path %}" method="post">
+        {% csrf_token %}
+        <button type="submit"><i class="fas fa-light fa-cart-plus"></i></button>
+    </form>
     {% if user.is_authenticated %}
-        <a href="{% url 'reviews:add-comment' product.name %}">
-            <button>Add comment</button>
-        </a>
-        <a href="{% url 'menu:edit' product.name %}">
-            <button>Edit</button>
-        </a>
-        <a href="{% url 'menu:delete' product.name %}">
-            <button class="danger">Delete</button>
-        </a>
+        {% if user.is_superuser %}
+            <a href="{% url 'menu:edit' product.name %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'menu:delete' product.name %}">
+                <button class="danger">Delete</button>
+            </a><br>
+        {% endif %}
 
-        <form action="{% url 'orders:add_product' product_id=product.id next=request.get_full_path %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Add to cart</button>
-        </form>
+        <a href="{% url 'reviews:add-comment' product.name %}">
+            <button><i class="fas fa-regular fa-comment-dots"></i></button>
+        </a>
 
         <form action="{% url 'menu:like' product.name %}" method="post">
             {% csrf_token %}
-            <button type="submit">Like</button>
+            <button type="submit"><i class="fas fa-regular fa-heart"></i></button>
         </form>
     {% endif %}
 </div>

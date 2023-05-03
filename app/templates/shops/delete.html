@@ -10,7 +10,7 @@
             <button class="danger" type="submit">Delete</button>
         </form>
 
-        <a href="{% url 'shops:all' %}">
+        <a href="{% url 'shops:detail' object.name %}">
             <button class="cancel">Cancel</button>
         </a>
     </div>

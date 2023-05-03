@@ -6,17 +6,17 @@
 - email subscription with celery
 - edit profile information
 - get all shops/products/recipes
-- add new shop/product/recipe
 - filter & ordering information about shops by name/address, etc
 - filter & ordering information about products by name/price/category/shop, etc
 - filter & ordering information about recipes by name/product, etc
-- get detail information about shop/product
-- edit shops/product
-- delete shops/product after confirmation
+- get detail information about shop/product/recipe
+- add new shop/product/recipe for admins
+- edit shops/product for admins
+- delete shops/product after confirmation for admins
 - different roles for users
 - add comments for products for authorized users
 - ask questions
-- add to favorites/remove from favorites
+- add to favorites/remove from favorites for authorized users
 - add to cart/remove from cart
 - create order with confirmation on email
 - admin get email after user create order

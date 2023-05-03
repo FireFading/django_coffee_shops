@@ -11,21 +11,22 @@
 
         <div class="product-info">
             <p>{{shop.opening_time}} - {{shop.closing_time}}</p>
-            <p><strong>address:</strong> {{shop.address}}</p><br>
-            <p><strong>phone:</strong> {{shop.phone_number}}</p>
-
+            <p><strong class="description">address:</strong> {{shop.address}}</p><br>
+            <p><strong class="description">phone:</strong> {{shop.phone_number}}</p>
         </div>
     </div>
 </div>
 
 <div class="position-button">
     {% if user.is_authenticated %}
-        <a href="{% url 'shops:edit' shop.name %}">
-            <button>Edit</button>
-        </a>
-        <a href="{% url 'shops:delete' shop.name %}">
-            <button class="danger">Delete</button>
-        </a>
+        {% if user.is_superuser %}
+            <a href="{% url 'shops:edit' shop.name %}">
+                <button>Edit</button>
+            </a>
+            <a href="{% url 'shops:delete' shop.name %}">
+                <button class="danger">Delete</button>
+            </a><br>
+        {% endif %}
     {% endif %}
 </div>
 

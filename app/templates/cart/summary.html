@@ -18,7 +18,6 @@
                     <th>Total</th>
                     <th></th>
                     <th></th>
-                    <th></th>
                 </tr>
                 {% for item in cart.items %}
                     <tr>
@@ -33,13 +32,11 @@
                         <td>
                             <form action="{% url 'orders:add_product' product_id=item.product.id next=request.get_full_path %}" method="post">
                             {% csrf_token %}
-                                <button type="submit">+</button>
+                                <button type="submit"><i class="fas fa-solid fa-plus"></i></button>
                             </form>
-                        </td>
-                        <td>
                             <form action="{% url 'orders:remove_product' product_id=item.product.id next=request.get_full_path %}" method="post">
                             {% csrf_token %}
-                                <button type="submit">-</button>
+                                <button type="submit"><i class="fas fa-solid fa-minus"></i></button>
                             </form>
                         </td>
                         <td>
@@ -51,7 +48,7 @@
                     </tr>
                 {% endfor %}
                 <td>Total price:</td>
-                <td>{{ cart.total }}</td>
+                <td><strong>{{ cart.total }}</strong></td>
             </table>
 
             <form class="form-control" action="{% url 'orders:order' %}" method="post">

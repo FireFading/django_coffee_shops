@@ -66,8 +66,7 @@ class Cart(object):
         """
         Applies lookup parameters defined in settings.
         """
-        lookup_parameters = getattr(settings, "CART_PRODUCT_LOOKUP", None)
-        if lookup_parameters:
+        if lookup_parameters := getattr(settings, "CART_PRODUCT_LOOKUP", None):
             queryset = queryset.filter(**lookup_parameters)
         return queryset
 
@@ -94,9 +93,9 @@ class Cart(object):
             raise ValueError("Quantity must be at least 1 when adding to cart")
         if product in self.products:
             self._items_dict[product.pk].quantity += quantity
+        elif price is None:
+            raise ValueError("Missing price when adding to cart")
         else:
-            if price is None:
-                raise ValueError("Missing price when adding to cart")
             self._items_dict[product.pk] = CartItem(product, quantity, price)
         self.update_session()
 
@@ -177,7 +176,7 @@ class Cart(object):
         """
         The number of items in cart, that's the sum of quantities.
         """
-        return sum([item.quantity for item in self.items])
+        return sum(item.quantity for item in self.items)
 
     @property
     def unique_count(self):
@@ -202,4 +201,4 @@ class Cart(object):
         """
         The total value of all items in the cart.
         """
-        return sum([item.subtotal for item in self.items])
+        return sum(item.subtotal for item in self.items)
