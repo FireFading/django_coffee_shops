@@ -1,0 +1,40 @@
+{% extends 'base/base.html' %}
+{% load cart_tags %}
+{% get_cart as cart %}
+
+{% block content %}
+<div class="container">
+    {% if not cart.items %}
+        <h2 class="detail-title">Your cart is empty</h2>
+    {% else %}
+        <h2 class="detail-title">Your cart</h2>
+        {% for item in cart.items %}
+            <div class="product-info">
+                <p><strong>price:</strong>{{item.product.price}} $</p>
+                <a href="{% url 'menu:detail' item.product.name %}">{{ item.product.name }}</a>
+                <p>{{item.quantity}}</p>
+            </div>
+            <form action="{% url 'orders:add_product' product_id=item.product.id next=request.get_full_path %}" method="post">
+                {% csrf_token %}
+                <button type="submit">+</button>
+            </form>
+            <form action="{% url 'orders:remove_products' product_id=item.product.id next=request.get_full_path %}" method="post">
+                {% csrf_token %}
+                <button class="danger" type="submit">Delete</button>
+            </form>
+            <strong>{{ item.subtotal }}</strong>
+        {% endfor %}
+        <form class="form-control" action="{% url 'orders:order' %}" method="post">
+            {% csrf_token %}
+            <input name="comment">
+            <button class="form-control" type="submit">Create order</button>
+        </form>
+    {% endif %}
+
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

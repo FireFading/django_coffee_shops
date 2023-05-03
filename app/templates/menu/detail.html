@@ -52,6 +52,11 @@
             <button class="danger">Delete</button>
         </a>
 
+        <form action="{% url 'orders:add_product' product_id=product.id next=request.get_full_path %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Add to cart</button>
+        </form>
+
         <form action="{% url 'menu:like' product.name %}" method="post">
             {% csrf_token %}
             <button type="submit">Like</button>

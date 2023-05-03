@@ -19,12 +19,14 @@ INSTALLED_APPS = [
     "django_filters",
     "crispy_forms",
     "widget_tweaks",
+    "cart",
     "home",
     "reviews",
     "users",
     "shops",
     "menu",
     "recipes",
+    "orders",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +76,6 @@ DATABASES = {
     # }
 }
 
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -84,6 +85,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+CART_PRODUCT_MODEL = "menu.models.Product"
 
 # Cashe
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}

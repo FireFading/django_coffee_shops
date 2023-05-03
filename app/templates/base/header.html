@@ -10,6 +10,7 @@
 
             {% if user.is_authenticated %}
                 <a href="{% url 'users:profile_edit' %}">Profile</a>
+                <a href="{% url 'orders:cart' %}">Cart</a>
                 <a href="{% url 'users:logout' %}">Logout</a>
             {% else %}
                 <a href="{% url 'users:login' %}">Login</a>

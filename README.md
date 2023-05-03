@@ -17,6 +17,9 @@
 - add comments for products for authorized users
 - ask questions
 - add to favorites/remove from favorites
+- add to cart/remove from cart
+- create order with confirmation on email
+- admin get email after user create order
 - self-created css and html
 
 ## Installation

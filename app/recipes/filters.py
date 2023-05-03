@@ -21,4 +21,7 @@ class RecipeFilter(FilterSet):
 
     class Meta:
         model = Product
-        fields = ["name", "products",]
+        fields = [
+            "name",
+            "products",
+        ]
