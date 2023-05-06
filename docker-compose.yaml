@@ -15,24 +15,36 @@ services:
       - db
       - redis
 
+  # db:
+  #   image: postgres:15-bullseye
+  #   container_name: postgres
+  #   ports:
+  #     - "5432:5432"
+  #   env_file:
+  #     - .env.example
+  #   healthcheck:
+  #     test:
+  #       [
+  #         "CMD-SHELL",
+  #         "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"
+  #       ]
+  #     interval: 10s
+  #     timeout: 3s
+  #     retries: 3
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data:cached
+
   db:
-    image: postgres:15-bullseye
-    container_name: postgres
-    ports:
-      - "5432:5432"
+    image: mysql:latest
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     env_file:
       - .env.example
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"
-        ]
-      interval: 10s
-      timeout: 3s
-      retries: 3
+    ports:
+      - "3306:3306"
     volumes:
-      - postgres_data:/var/lib/postgresql/data:cached
+      - mysql_data:/var/lib/mysql
 
   celery:
     container_name: celery
@@ -66,4 +78,5 @@ services:
       - app
 
 volumes:
-  postgres_data:
+  mysql_data:
+  # postgres_data:

@@ -10,3 +10,4 @@ redis
 uwsgi
 gunicorn
 nox
+mysqlclient

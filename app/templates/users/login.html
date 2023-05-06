@@ -26,9 +26,8 @@
             {% endfor %}
             {% endif %}
 
-            {% for field in form %}
-                {% render_field field placeholder=field.name %}
-            {% endfor %}
+            {% render_field form.email placeholder=form.email.name %}
+            {% render_field form.password placeholder=form.password.name %}
         </div>
 
         <input type="hidden" name="next" value="{{ next }}">

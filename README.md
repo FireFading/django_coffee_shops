@@ -22,6 +22,7 @@
 - admin get email after user create order
 - self-created css and html
 - nginx proxies requests to localhost with collecting static & media files
+- you can choose database: sqlite/mysql/postgresql
 
 ## Installation
 - in env.example all variables used in project, change it to .env, several variables that are common, already define as example, secret variables is empty
