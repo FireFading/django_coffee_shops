@@ -66,7 +66,7 @@ class SignupView(FormView):
 
     def form_valid(self, form):
         user = form.save()
-        send_mail(self.request, form.cleaned_data, user)
+        # send_mail(self.request, form.cleaned_data, user)
         messages.success(self.request, "Profile successfully created")
         messages.success(self.request, "To your mail send confirmation to activate your account")
         return super(SignupView, self).form_valid(form)

@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container">
 
-    <form class="form-control" data-bitwarden-watching="1" action="{% url 'users:login' %}" method="post">
+    <form class="form-control" data-bitwarden-watching="1" action="{% url 'users:register' %}" method="post">
         <h2 class="text-center">Welcome!</h2>
         {% csrf_token %}
         <div class="row">

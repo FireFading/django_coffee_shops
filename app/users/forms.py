@@ -85,37 +85,37 @@ class SignupForm(ModelForm):
         user.save()
         return user
 
-    def clean_phone(self):
-        phone = self.cleaned_data["phone"].lower()
-        r = User.objects.filter(phone=phone)
-        if r.count():
-            raise ValidationError("Такой телефон уже зарегистрирован")
-        try:
-            phone = phonenumbers.parse(phone)
-            if phonenumbers.is_valid_number(phone) and phonenumbers.is_possible_number(phone):
-                return (
-                    phonenumbers.format_number(phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
-                    .replace(" ", "")
-                    .replace("-", "")
-                )
-            else:
-                raise ValidationError("Неверный формат телефона")
-        except Exception as error:
-            raise ValidationError("Неверный формат телефона") from error
+    # def clean_phone(self):
+    #     phone = self.cleaned_data["phone"].lower()
+    #     r = User.objects.filter(phone=phone)
+    #     if r.count():
+    #         raise ValidationError("Такой телефон уже зарегистрирован")
+    #     try:
+    #         phone = phonenumbers.parse(phone)
+    #         if phonenumbers.is_valid_number(phone) and phonenumbers.is_possible_number(phone):
+    #             return (
+    #                 phonenumbers.format_number(phone, phonenumbers.PhoneNumberFormat.INTERNATIONAL)
+    #                 .replace(" ", "")
+    #                 .replace("-", "")
+    #             )
+    #         else:
+    #             raise ValidationError("Неверный формат телефона")
+    #     except Exception as error:
+    #         raise ValidationError("Неверный формат телефона") from error
 
-    def clean_password2(self):
-        password = self.cleaned_data["password"]
-        password2 = self.cleaned_data["password2"]
-        if password != password2:
-            raise ValidationError("Пароли не совпадают")
-        try:
-            re.search(settings.PASS_PATTERN, password)
-            return password
-        except Exception as error:
-            raise ValidationError(
-                "Длина пароля от 8 до 24 символов. Пароль должен содержать цифры, спецсимволы \
-                (.,@,_,-,%,$,/,\\,*,!, включая пробел) и латинские буквы верхнего и нижнего регистра."
-            ) from error
+    # def clean_password2(self):
+    #     password = self.cleaned_data["password"]
+    #     password2 = self.cleaned_data["password2"]
+    #     if password != password2:
+    #         raise ValidationError("Пароли не совпадают")
+    #     try:
+    #         re.search(settings.PASS_PATTERN, password)
+    #         return password
+    #     except Exception as error:
+    #         raise ValidationError(
+    #             "Длина пароля от 8 до 24 символов. Пароль должен содержать цифры, спецсимволы \
+    #             (.,@,_,-,%,$,/,\\,*,!, включая пробел) и латинские буквы верхнего и нижнего регистра."
+    #         ) from error
 
     def clean_email(self):
         email = self.cleaned_data["email"]
