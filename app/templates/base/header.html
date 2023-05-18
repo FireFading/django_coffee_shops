@@ -7,23 +7,7 @@
         <div>
             <h3>Days Before Summer Coffee Party</h3>
             <p id="timer"></p>
-            <dialog id="favDialog">
-                <form method="dialog">
-                <p>
-                    <label for="favAnimal">Favorite animal:</label>
-                    <select id="favAnimal" name="favAnimal">
-                        <option></option>
-                        <option></option>
-                        <option>Red panda</option>
-                        <option>Spider monkey</option>
-                    </select>
-                </p>
-                <div>
-                    <button id="cancel" type="reset">Wait</button>
-                    <button type="submit">Wait</button>
-                </div>
-                </form>
-            </dialog>
+
             <div>
                 <button id="showDetails">Learn More</button>
             </div>
@@ -45,30 +29,6 @@
     <script src="{% static 'js/timeout.js' %}" rel="js" type="text/javascript"></script>
 
     <script>
-        const updateButton = document.getElementById("showDetails");
-        const cancelButton = document.getElementById("cancel");
-        const dialog = document.getElementById("favDialog");
-        dialog.returnValue = "favAnimal";
-
-        function openCheck(dialog) {
-        if (dialog.open) {
-            console.log("Dialog open");
-        } else {
-            console.log("Dialog closed");
-        }
-        }
-
-        // Update button opens a modal dialog
-        updateButton.addEventListener("click", () => {
-        dialog.showModal();
-        openCheck(dialog);
-        });
-
-        // Form cancel button closes the dialog box
-        cancelButton.addEventListener("click", () => {
-        dialog.close("animalNotChosen");
-        openCheck(dialog);
-        });
 
     </script>
 </header>
