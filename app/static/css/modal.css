@@ -1,0 +1,44 @@
+.timer__modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.timer__modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    max-width: 600px;
+    position: relative;
+}
+
+.timer__modal-close {
+    cursor: pointer;
+    padding: 5px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+
+.timer__modal-close:hover {
+    color: red;
+}
+
+.display-none {
+    display: none;
+}
+
+.timer__modal-title {
+    padding-bottom: 20px;
+}

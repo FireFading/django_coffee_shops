@@ -1,0 +1,35 @@
+{% load static %}
+
+<div class="timer__modal display-none">
+    <div class="timer__modal-content">
+    <span class="timer__modal-close">&times;</span>
+    <h2 class="timer__modal-title detail-title">Coffee party starts soon!</h2>
+        <p>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit esse
+            molestiae quod quasi pariatur quidem quo enim porro sunt. Ea labore
+            laborum placeat. Similique animi nihil cum ad autem qui ut dolores illum,
+            molestias assumenda eius quibusdam ratione. Cum, doloribus?
+        </p>
+    </div>
+</div>
+
+<script>
+    const  openModal = document.querySelector('#showDetails')
+    const timerModal = document.querySelector('.timer__modal')
+    const closeBtn = document.querySelector('.timer__modal-close')
+
+    openModal.addEventListener('click', () => {
+        timerModal.classList.remove('display-none')
+    })
+
+    closeBtn.addEventListener('click', () => {
+        timerModal.classList.add('display-none')
+    })
+
+    timerModal.addEventListener('click', e => {
+        const target = e.target
+        if (target === timerModal || target.closest('.timer__modal-close')) {
+            timerModal.classList.add('display-none')
+        }
+    })
+</script>
